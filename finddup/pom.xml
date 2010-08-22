@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <parent>
-        <artifactId>research</artifactId>
-        <groupId>com.boscarine</groupId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>research</artifactId>
+		<groupId>com.boscarine</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 
 
-   <artifactId>finddup</artifactId>
-   <packaging>war</packaging>
+	<artifactId>finddup</artifactId>
+	<packaging>war</packaging>
 
- 	<properties>
+	<properties>
 		<!-- Explicitly declaring the source encoding eliminates the following message: -->
 		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,8 +26,8 @@
 	<repositories>
 		<!-- The JBoss Community public repository is a composite repository of several major repositories -->
 		<!-- see http://community.jboss.org/wiki/MavenGettingStarted-Users -->
-		<!-- At the time of writing, Arquillian and the JBoss Java EE specification POMs are only in the JBoss Community public repository (not Maven 
-			central) -->
+		<!-- At the time of writing, Arquillian and the JBoss Java EE specification POMs are only in the JBoss Community public repository 
+			(not Maven central) -->
 		<repository>
 			<id>jboss-public-repository</id>
 			<name>JBoss Repository</name>
@@ -38,6 +39,12 @@
 			<snapshots>
 				<updatePolicy>daily</updatePolicy>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>oracleReleases</id>
+			<name>Oracle Released Java Packages</name>
+			<url>http://download.oracle.com/maven</url>
+			<layout>default</layout>
 		</repository>
 	</repositories>
 
@@ -57,7 +64,14 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+
+
 	<dependencies>
+		<dependency>
+			<groupId>com.sleepycat</groupId>
+			<artifactId>je</artifactId>
+			<version>4.0.103</version>
+		</dependency>
 		<!-- Weld Extensions provides convenient, portable CDI extensions such as an injectable logger -->
 		<dependency>
 			<groupId>org.jboss.weld</groupId>
@@ -66,8 +80,8 @@
 		</dependency>
 
 		<!-- Need to use the injectable logger in Weld Extensions -->
-		<!-- Switch scope to provided if server provides slf4j; JBoss AS provides it; GlassFish provides it if you have the Hibernate JPA provider 
-			installed -->
+		<!-- Switch scope to provided if server provides slf4j; JBoss AS provides it; GlassFish provides it if you have the Hibernate JPA 
+			provider installed -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -83,6 +97,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 		<!-- JSR-303 (Bean Validation) Implementation -->
 		<!-- Provides portable constraints such as @Email -->
 		<!-- Hibernate Validator is the only JSR-303 implementation at the moment, so we can assume it's provided -->
@@ -93,13 +113,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Needed for running tests (you may also use TestNG) -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -108,27 +121,27 @@
 		</dependency>
 		<!-- Optional, but highly recommended -->
 		<!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA) JPA from JUnit/TestNG -->
-		<dependency>
-			<groupId>org.jboss.arquillian</groupId>
-			<artifactId>arquillian-junit</artifactId>
-			<version>${arquillian.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.jboss.arquillian.container</groupId>
-			<artifactId>arquillian-glassfish-embedded-3</artifactId>
-			<version>${arquillian.version}</version>
-			<scope>test</scope>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.jboss.arquillian</groupId> -->
+		<!-- <artifactId>arquillian-junit</artifactId> -->
+		<!-- <version>${arquillian.version}</version> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
+<!---->
+<!---->
+		<!-- <dependency> -->
+		<!-- <groupId>org.jboss.arquillian.container</groupId> -->
+		<!-- <artifactId>arquillian-glassfish-embedded-3</artifactId> -->
+		<!-- <version>${arquillian.version}</version> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
 		<!-- This imports the Java EE 6 runtime libraries provided by GlassFish Embedded -->
-		<dependency>
-			<groupId>org.glassfish.extras</groupId>
-			<artifactId>glassfish-embedded-all</artifactId>
-			<version>3.0.1-b20</version>
-			<scope>provided</scope>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.glassfish.extras</groupId> -->
+		<!-- <artifactId>glassfish-embedded-all</artifactId> -->
+		<!-- <version>3.0.1-b20</version> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
 	</dependencies>
 
 	<build>
