@@ -2,15 +2,26 @@ package com.boscarine.finddup;
 
 import java.util.Date;
 
-public class FileEntry {
+import com.sleepycat.persist.model.Entity;
+import com.sleepycat.persist.model.PrimaryKey;
+import com.sleepycat.persist.model.Relationship;
+import com.sleepycat.persist.model.SecondaryKey;
 
-	private final String fileName;
-	private final long lastModified;
-	private final long size;
-	private final String md5;
+@Entity
+public class FileEntry {
+	private FileEntry() {
+		super();
+	}
+
+	@PrimaryKey
+	private String fileName;
+	private long lastModified;
+	private long size;
+	@SecondaryKey(relate = Relationship.ONE_TO_ONE)
+	private String md5;
 
 	public FileEntry(String fileName, long lastModified, long size, String md5) {
-		super();
+		this();
 		this.fileName = fileName;
 		this.lastModified = lastModified;
 		this.size = size;

@@ -1,9 +1,6 @@
 package com.boscarine.finddup;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,7 +17,7 @@ public class Find {
 	private static final ExecutorService exec = Executors.newFixedThreadPool(3);
 
 	public List<FileEntry> createFileEntries(String locatePattern) {
-		Collection<String> files = runUNIXCommand("locate", locatePattern);
+		Collection<String> files = NativeCodeWrapper.runNativeCommand("locate", locatePattern);
 		List<FileEntry> out = new ArrayList<FileEntry>(files.size());
 		List<Future<FileEntry>> workers = new ArrayList<Future<FileEntry>>();
 		for (String fileName : files) {
@@ -40,22 +37,7 @@ public class Find {
 		return out;
 	}
 
-	public static List<String> runUNIXCommand(String... cmd) {
-		List<String> out = new ArrayList<String>();
 
-		try {
-			Process p = Runtime.getRuntime().exec(cmd);
-			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-			for (String s = null; (s = stdInput.readLine()) != null;) {
-				out.add(new String(s));
-			}
-
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return out;
-	}
 
 	public static class FileEntryWorker implements Callable<FileEntry> {
 		private final String fileName;
