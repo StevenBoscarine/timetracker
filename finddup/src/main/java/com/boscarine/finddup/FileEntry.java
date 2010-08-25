@@ -17,7 +17,7 @@ public class FileEntry {
 	private String fileName;
 	private long lastModified;
 	private long size;
-	@SecondaryKey(relate = Relationship.ONE_TO_ONE)
+	@SecondaryKey(relate = Relationship.MANY_TO_ONE)
 	private String md5;
 
 	public FileEntry(String fileName, long lastModified, long size, String md5) {

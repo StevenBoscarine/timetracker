@@ -14,9 +14,11 @@ public class FindTest {
 
 	public void initialTest() throws IOException {
 		
-		Collection<FileEntry> entries= find.createFileEntries("*.avi");
+		FileEntryStore store = new FileEntryStore();
+		Collection<FileEntry> entries= find.createFileEntries("*.avi", store);
 		for(FileEntry entry : entries){
 //			System.out.println(entry);
 		}
+		store.shutdown();
 	}
 }
