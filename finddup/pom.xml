@@ -13,26 +13,31 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<!-- Explicitly declaring the source encoding eliminates the following message: -->
-		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent! -->
+		<!-- Explicitly declaring the source encoding eliminates the following 
+			message: -->
+		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Timestamp format for the maven.build.timestamp property -->
-		<!-- You can reference property in pom.xml or filtered resources (must enable third-party plugin if using Maven < 2.1) -->
+		<!-- You can reference property in pom.xml or filtered resources (must 
+			enable third-party plugin if using Maven < 2.1) -->
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 		<arquillian.version>1.0.0.Alpha3</arquillian.version>
 		<jboss-javaee6-spec.version>1.0.0.Beta7</jboss-javaee6-spec.version>
 	</properties>
 
 	<repositories>
-		<!-- The JBoss Community public repository is a composite repository of several major repositories -->
+		<!-- The JBoss Community public repository is a composite repository of 
+			several major repositories -->
 		<!-- see http://community.jboss.org/wiki/MavenGettingStarted-Users -->
-		<!-- At the time of writing, Arquillian and the JBoss Java EE specification POMs are only in the JBoss Community public repository 
-			(not Maven central) -->
+		<!-- At the time of writing, Arquillian and the JBoss Java EE specification 
+			POMs are only in the JBoss Community public repository (not Maven central) -->
 		<repository>
 			<id>jboss-public-repository</id>
 			<name>JBoss Repository</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public</url>
-			<!-- These optional flags are designed to speed up your builds by reducing remote server calls -->
+			<!-- These optional flags are designed to speed up your builds by reducing 
+				remote server calls -->
 			<releases>
 				<updatePolicy>never</updatePolicy>
 			</releases>
@@ -53,7 +58,8 @@
 			<id>jboss-public-repository</id>
 			<name>JBoss Repository</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public</url>
-			<!-- These optional flags are designed to speed up your builds by reducing remote server calls -->
+			<!-- These optional flags are designed to speed up your builds by reducing 
+				remote server calls -->
 			<releases>
 				<updatePolicy>never</updatePolicy>
 			</releases>
@@ -72,7 +78,8 @@
 			<artifactId>je</artifactId>
 			<version>4.0.103</version>
 		</dependency>
-		<!-- Weld Extensions provides convenient, portable CDI extensions such as an injectable logger -->
+		<!-- Weld Extensions provides convenient, portable CDI extensions such 
+			as an injectable logger -->
 		<dependency>
 			<groupId>org.jboss.weld</groupId>
 			<artifactId>weld-extensions</artifactId>
@@ -80,8 +87,8 @@
 		</dependency>
 
 		<!-- Need to use the injectable logger in Weld Extensions -->
-		<!-- Switch scope to provided if server provides slf4j; JBoss AS provides it; GlassFish provides it if you have the Hibernate JPA 
-			provider installed -->
+		<!-- Switch scope to provided if server provides slf4j; JBoss AS provides 
+			it; GlassFish provides it if you have the Hibernate JPA provider installed -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -89,7 +96,8 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<!-- Remove if server provides slf4j; JBoss AS provides it; GlassFish provides it if you have the Hibernate JPA provider installed -->
+		<!-- Remove if server provides slf4j; JBoss AS provides it; GlassFish provides 
+			it if you have the Hibernate JPA provider installed -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-jdk14</artifactId>
@@ -105,7 +113,8 @@
 
 		<!-- JSR-303 (Bean Validation) Implementation -->
 		<!-- Provides portable constraints such as @Email -->
-		<!-- Hibernate Validator is the only JSR-303 implementation at the moment, so we can assume it's provided -->
+		<!-- Hibernate Validator is the only JSR-303 implementation at the moment, 
+			so we can assume it's provided -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -119,35 +128,22 @@
 			<version>5.12.1</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- Optional, but highly recommended -->
-		<!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA) JPA from JUnit/TestNG -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.jboss.arquillian</groupId> -->
-		<!-- <artifactId>arquillian-junit</artifactId> -->
-		<!-- <version>${arquillian.version}</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
-<!---->
-<!---->
-		<!-- <dependency> -->
-		<!-- <groupId>org.jboss.arquillian.container</groupId> -->
-		<!-- <artifactId>arquillian-glassfish-embedded-3</artifactId> -->
-		<!-- <version>${arquillian.version}</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
-		<!-- This imports the Java EE 6 runtime libraries provided by GlassFish Embedded -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.glassfish.extras</groupId> -->
-		<!-- <artifactId>glassfish-embedded-all</artifactId> -->
-		<!-- <version>3.0.1-b20</version> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
+
+		<!-- This imports the Java EE 6 runtime libraries provided by GlassFish 
+			Embedded -->
+		<dependency>
+			<groupId>org.glassfish.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>3.0.1-b20</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
-			<!-- Compiler plugin enforces Java 1.6 compatibility and controls execution of annotation processors -->
+			<!-- Compiler plugin enforces Java 1.6 compatibility and controls execution 
+				of annotation processors -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.1</version>
@@ -162,10 +158,12 @@
 				<version>2.4.3</version>
 				<configuration>
 					<systemProperties>
-						<!-- This optional property fixes an annoyance with Glassfish that puts derby.log in the project root -->
+						<!-- This optional property fixes an annoyance with Glassfish that 
+							puts derby.log in the project root -->
 						<property>
 							<name>derby.stream.error.file</name>
-							<!-- If you save the log in target it is less likely to get committed in your project -->
+							<!-- If you save the log in target it is less likely to get committed 
+								in your project -->
 							<value>target/derby.log</value>
 						</property>
 					</systemProperties>

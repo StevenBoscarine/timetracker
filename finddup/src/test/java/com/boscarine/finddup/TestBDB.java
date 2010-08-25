@@ -20,7 +20,7 @@ public class TestBDB {
 		File envHome = new File(System.getProperty("user.home"), ".finddup");
 		envHome.mkdirs();
 		logger.info(envHome.getAbsoluteFile());
-		env.setup(envHome, false);
+		env.setup(envHome);
 		EntityStore store = env.getEntityStore();
 		PrimaryIndex<String, FileEntry> primaryIndex = store.getPrimaryIndex(String.class, FileEntry.class);
 //		primaryIndex.put(new FileEntry("foo", 0, 0, "32"));

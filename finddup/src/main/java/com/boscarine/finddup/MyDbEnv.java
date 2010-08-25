@@ -22,7 +22,8 @@ public class MyDbEnv {
 
 	// The setup() method opens the environment and store
 	// for us.
-	public void setup(File envHome, boolean readOnly) throws DatabaseException {
+	public void setup(File envHome) throws DatabaseException {
+		boolean readOnly=false;
 
 		EnvironmentConfig myEnvConfig = new EnvironmentConfig();
 		StoreConfig storeConfig = new StoreConfig();
