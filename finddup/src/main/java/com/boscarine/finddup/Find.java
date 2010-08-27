@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class Find {
 	private final Log logger = LogFactory.getLog(getClass());
-	private static final ExecutorService exec = Executors.newFixedThreadPool(3);
+
 
 	public List<FileEntry> createFileEntries(String locatePattern, FileEntryStore store) {
 		Collection<String> files = NativeCodeWrapper.runNativeCommand("locate", locatePattern);
@@ -22,6 +22,7 @@ public class Find {
 	}
 
 	private List<FileEntry> buildFileEntriesFromFileList(Collection<String> files, FileEntryStore store) {
+		 final ExecutorService exec = Executors.newFixedThreadPool(3);
 		List<FileEntry> out = new ArrayList<FileEntry>(files.size());
 		List<Future<FileEntry>> workers = new ArrayList<Future<FileEntry>>();
 		
@@ -39,7 +40,7 @@ public class Find {
 				throw new RuntimeException(e);
 			}
 		}
-		exec.shutdown();
+		logger.warn(exec.shutdownNow());
 		return out;
 	}
 

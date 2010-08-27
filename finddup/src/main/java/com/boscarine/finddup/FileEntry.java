@@ -1,5 +1,6 @@
 package com.boscarine.finddup;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.sleepycat.persist.model.Entity;
@@ -8,9 +9,12 @@ import com.sleepycat.persist.model.Relationship;
 import com.sleepycat.persist.model.SecondaryKey;
 
 @Entity
-public class FileEntry {
+public class FileEntry implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	private FileEntry() {
 		super();
+		this.hashDate=System.currentTimeMillis();
 	}
 
 	@PrimaryKey
@@ -19,6 +23,11 @@ public class FileEntry {
 	private long size;
 	@SecondaryKey(relate = Relationship.MANY_TO_ONE)
 	private String md5;
+	private final long hashDate;
+
+	public long getHashDate() {
+		return hashDate;
+	}
 
 	public FileEntry(String fileName, long lastModified, long size, String md5) {
 		this();
@@ -26,6 +35,7 @@ public class FileEntry {
 		this.lastModified = lastModified;
 		this.size = size;
 		this.md5 = md5;
+		
 	}
 
 	public String getFileName() {
