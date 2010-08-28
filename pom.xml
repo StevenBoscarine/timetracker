@@ -81,5 +81,7 @@
 
 		</plugins>
 	</build>
-
+    <modules>
+        <module>finddup</module>
+    </modules>
 </project>

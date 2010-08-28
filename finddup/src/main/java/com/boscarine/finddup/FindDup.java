@@ -31,6 +31,9 @@ public class FindDup {
 		findDuplicates("*.java");
 		findDuplicates("*.mov");
 		findDuplicates("*.avi");
+		findDuplicates("*.jpg");
+		findDuplicates("*.zip");
+		findDuplicates("*.rar");
 	}
 
 	private static void findDuplicates(String extension) {
