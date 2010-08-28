@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="content">
-		<h1>Finddups</h1>
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+        <h1>Finddups 8 </h1>
+        <ul>
+            <ui:remove>
+                <ui:repeat value="#{findDupsUI.dups.keySet()}" var="md5">
+                    <li>#{md5}</li>
+                </ui:repeat>
+            </ui:remove>
+            <c:forEach var="entry" items="#{findDupsUI.dups}">
+                Name:  #{entry.key}
+                Value: #{entry.value}<br/>
+            </c:forEach>
 
-	</ui:define>
+        </ul>
+    </ui:define>
+
 </ui:composition>
