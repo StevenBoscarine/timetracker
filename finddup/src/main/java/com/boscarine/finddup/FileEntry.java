@@ -1,12 +1,12 @@
 package com.boscarine.finddup;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import com.sleepycat.persist.model.Entity;
 import com.sleepycat.persist.model.PrimaryKey;
 import com.sleepycat.persist.model.Relationship;
 import com.sleepycat.persist.model.SecondaryKey;
+
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class FileEntry implements Serializable{

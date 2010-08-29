@@ -2,28 +2,49 @@
 
 package com.boscarine.finddup;
 
-import java.io.File;
-
 import com.sleepycat.je.DatabaseException;
 import com.sleepycat.je.Environment;
 import com.sleepycat.je.EnvironmentConfig;
-
 import com.sleepycat.persist.EntityStore;
 import com.sleepycat.persist.StoreConfig;
 
-public class MyDbEnv {
+import java.io.File;
 
-	private Environment myEnv;
-	private EntityStore store;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-	// Our constructor does nothing
-	public MyDbEnv() {
+/**
+ * Berkeley DB specific boilerplate
+ * 
+ * @author steven
+ * 
+ */
+public class ReadWriteBDBEnvironment {
+
+
+	private final Log logger = LogFactory.getLog(getClass());
+	public File getDefaultHomeDir(){
+		File envHome = new File(System.getProperty("user.home"), ".finddup");
+		envHome.mkdirs();
+		logger.info(envHome.getAbsoluteFile());
+		return envHome;
+		
 	}
+	
+	protected Environment myEnv;
+	protected EntityStore store;
+	protected boolean readOnly = false;
+	public void setup(){
+		setup(getDefaultHomeDir(), false);
+	}
+	/**
+	 * The setup() method opens the environment and store for us.
+	 * 
+	 * @param envHome
+	 * @throws DatabaseException
+	 */
+	protected void setup(File envHome, boolean readOnly) throws DatabaseException {
 
-	// The setup() method opens the environment and store
-	// for us.
-	public void setup(File envHome) throws DatabaseException {
-		boolean readOnly=false;
 
 		EnvironmentConfig myEnvConfig = new EnvironmentConfig();
 		StoreConfig storeConfig = new StoreConfig();
@@ -31,9 +52,8 @@ public class MyDbEnv {
 		myEnvConfig.setReadOnly(readOnly);
 		storeConfig.setReadOnly(readOnly);
 
-		// If the environment is opened for write, then we want to be
-		// able to create the environment and entity store if
-		// they do not exist.
+		// If the environment is opened for write, then we want to be able to
+		// create the environment and entity store if they do not exist.
 		myEnvConfig.setAllowCreate(!readOnly);
 		storeConfig.setAllowCreate(!readOnly);
 
@@ -43,17 +63,17 @@ public class MyDbEnv {
 
 	}
 
-	// Return a handle to the entity store
 	public EntityStore getEntityStore() {
 		return store;
 	}
 
-	// Return a handle to the environment
 	public Environment getEnv() {
 		return myEnv;
 	}
 
-	// Close the store and environment
+	/**
+	 * Close the store and environment
+	 */
 	public void close() {
 		if (store != null) {
 			try {

@@ -1,13 +1,17 @@
 package com.boscarine.finddup;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+/**
+ * Methods to generate MD5 file hashes
+ * @author steven
+ *
+ */
 public class Hasher {
 	@SuppressWarnings("unused")
 	private static final Log logger = LogFactory.getLog(Hasher.class);

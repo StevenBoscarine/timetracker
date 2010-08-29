@@ -4,20 +4,31 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/WEB-INF/templates/default.xhtml">
+    <f:metadata>
+        <f:viewParam id="id" name="filePattern" value="#{findDupsUI.filePattern}"
+                     required="true"
+                     requiredMessage="You did not specify an id. (The id parameter is missing)"
+                     converterMessage="Invalid id. (The id parameter is not a number)"
+                     validatorMessage="Invalid id. (The id parameter is not a positive number)">
+        </f:viewParam>
+    </f:metadata>
+
+    <ui:define name="title">Find Duplicate Files on Your Local Filesystem.</ui:define>
     <ui:define name="content">
-        <h1>Finddups 8 </h1>
-        <ul>
-            <ui:remove>
-                <ui:repeat value="#{findDupsUI.dups.keySet()}" var="md5">
-                    <li>#{md5}</li>
-                </ui:repeat>
-            </ui:remove>
+        <h1><ui:insert name="title"/> !!</h1>
+        <table>
             <c:forEach var="entry" items="#{findDupsUI.dups}">
-                Name:  #{entry.key}
-                Value: #{entry.value}<br/>
+                <tr>
+                    <th>#{entry.md5} ${entry.fileSize}</th>
+                    <td>
+                        <c:forEach var="file" items="#{entry.files}">
+                            #{file.getAbsolutePath()}#{file.lastModified()}<br/>
+                        </c:forEach>
+                    </td>
+                </tr>
             </c:forEach>
 
-        </ul>
+        </table>
     </ui:define>
 
 </ui:composition>

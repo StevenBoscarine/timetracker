@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PreDestroy;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,19 +14,25 @@ import com.sleepycat.persist.EntityIndex;
 import com.sleepycat.persist.EntityStore;
 import com.sleepycat.persist.PrimaryIndex;
 import com.sleepycat.persist.SecondaryIndex;
+public class FileEntryStore{
+    private static FileEntryStore instance;
 
-public class FileEntryStore {
-	private final MyDbEnv env = new MyDbEnv();
+    public static synchronized FileEntryStore getInstance() {
+        if(instance == null){
+            instance=new FileEntryStore();
+        }
+        return instance;
+    }
+
+    private final ReadWriteBDBEnvironment env = new ReadWriteBDBEnvironment();
 	private final Log logger = LogFactory.getLog(getClass());
 	private final EntityStore store;
 	private final PrimaryIndex<String, FileEntry> primaryIndex;
 	private final SecondaryIndex<String, String, FileEntry> secondaryIndex;
 
-	public FileEntryStore() {
-		File envHome = new File(System.getProperty("user.home"), ".finddup");
-		envHome.mkdirs();
-		logger.info(envHome.getAbsoluteFile());
-		env.setup(envHome);
+	private FileEntryStore() {
+
+		env.setup();
 		store = env.getEntityStore();
 		primaryIndex = store.getPrimaryIndex(String.class, FileEntry.class);
 		secondaryIndex = store.getSecondaryIndex(primaryIndex, String.class, "md5");
@@ -66,6 +74,7 @@ public class FileEntryStore {
 		return out;
 	}
 
+	@PreDestroy
 	public void shutdown() {
 		store.close();
 		env.close();

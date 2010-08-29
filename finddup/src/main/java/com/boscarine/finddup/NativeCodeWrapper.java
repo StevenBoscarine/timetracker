@@ -6,13 +6,19 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Java wrappers needed to send command to OS, such as "locate" and "md5sum"
+ * 
+ * @author steven
+ * 
+ */
 public class NativeCodeWrapper {
 
 	// private static final Log logger =
 	// LogFactory.getLog(NativeCodeWrapper.class);
 
 	public static List<String> runNativeCommand(String... cmd) {
-		List<String> out = new ArrayList<String>();
+		final List<String> out = new ArrayList<String>();
 		Process p = null;
 		try {
 			p = Runtime.getRuntime().exec(cmd);

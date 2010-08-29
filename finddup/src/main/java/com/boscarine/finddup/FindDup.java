@@ -1,20 +1,27 @@
 package com.boscarine.finddup;
 
-import java.util.Collection;
+import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+@ApplicationScoped
 public class FindDup {
+	private FileEntryStore store=FileEntryStore.getInstance();
+	final Find find = new Find();
 
-	private static Map<String, List<FileEntry>> findDuplicates(final FileEntryStore store) {
+	private static Map<String, List<FileEntry>> findAllDuplicates(List<FileEntry> filesFound, final FileEntryStore store) {
 		final Map<String, List<FileEntry>> out = new TreeMap<String, List<FileEntry>>();
-		for (FileEntry entry : store.listAll()) {
+		for (FileEntry entry : filesFound) {
 			String md5 = entry.getMd5();
 			List<FileEntry> duplicates = store.findByMD5(md5);
+			purgeMissingFiles(duplicates);
 			if (duplicates.size() > 1) {
 				out.put(md5, duplicates);
 			}
@@ -22,41 +29,33 @@ public class FindDup {
 		return out;
 	}
 
+	private static void purgeMissingFiles(List<FileEntry> duplicates){
+		for(Iterator<FileEntry> iterator = duplicates.iterator(); iterator.hasNext(); ){
+			FileEntry entry = iterator.next();
+			File file = new File(entry.getFileName());
+			if(!file.exists()){
+				logger.error(file.getAbsoluteFile() + " does not exist.  Was it moved or deleted?");
+				iterator.remove();
+			}
+		}
+	}
+	
+	
 	private static final Log logger = LogFactory.getLog(FindDup.class);
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		findDuplicates("*.java");
-		findDuplicates("*.mov");
-		findDuplicates("*.avi");
-		findDuplicates("*.jpg");
-		findDuplicates("*.zip");
-		findDuplicates("*.rar");
-	}
-
-	private static void findDuplicates(String extension) {
-		final Find find = new Find();
-		final FileEntryStore store = new FileEntryStore();
+	public  Map<String, List<FileEntry>> findDuplicates(String extension) {
 		long start = System.currentTimeMillis();
-		Collection<FileEntry> entries = find.createFileEntries(extension, store);
+		List<FileEntry> entries = find.createFileEntries(extension, store);
 		for (FileEntry entry : entries) {
 			store.persist(entry);
 		}
-		Map<String, List<FileEntry>> dups = findDuplicates(store);
-		logger.info("duplicates:" + printMap(dups));
-		store.shutdown();
-
+		Map<String, List<FileEntry>> dups = findAllDuplicates(entries, store);
 		logger.info("completed in " + (System.currentTimeMillis() - start) + " ms");
+		return dups;
 	}
 
-	public static String printMap(Map<?, ?> c) {
-		StringBuilder sb = new StringBuilder();
-		for (Object key : c.keySet()) {
-			sb.append("\n" + key + "\t" + c.get(key));
-		}
-		return sb.toString();
-	}
-
+    public void shutdown(){
+        System.out.println("Beginning proper shutdown");
+        store.shutdown();
+    }
 }
