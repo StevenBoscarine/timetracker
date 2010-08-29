@@ -18,7 +18,7 @@
         <h1>Find Duplicate Files on Your Local Filesystem.</h1>
 
         <table>
-            <c:forEach var="entry" items="#{findDupsUI.dups}">
+            <c:forEach var="entry" items="#{findDupsUIJPA.dups}">
                 <tr>
                     <th>#{entry.md5} ${entry.fileSize}</th>
                     <td>
@@ -32,7 +32,7 @@
             </c:forEach>
 
         </table>
-     
+
 
     </ui:define>
 

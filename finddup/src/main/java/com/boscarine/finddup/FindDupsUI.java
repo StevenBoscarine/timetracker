@@ -23,7 +23,21 @@ public class FindDupsUI {
 		dups = transformDuplicatesToUIObjects(findDup.findDuplicates(filePattern));
 	}
 
-	private String filePattern = "*.mov";
+    private List<String> toDiscard;
+
+    public List<String> getToDiscard() {
+        return toDiscard;
+    }
+
+    public void delete(){
+        System.out.println("Delete called");
+    }
+
+    public void setToDiscard(List<String> toDiscard) {
+        this.toDiscard = toDiscard;
+    }
+
+    private String filePattern = "*.mov";
 
 	// tmp
 
