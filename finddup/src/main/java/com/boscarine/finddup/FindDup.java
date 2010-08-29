@@ -21,7 +21,7 @@ public class FindDup {
 		for (FileEntry entry : filesFound) {
 			String md5 = entry.getMd5();
 			List<FileEntry> duplicates = store.findByMD5(md5);
-			purgeMissingFiles(duplicates);
+//			purgeMissingFiles(duplicates);
 			if (duplicates.size() > 1) {
 				out.put(md5, duplicates);
 			}
@@ -29,26 +29,26 @@ public class FindDup {
 		return out;
 	}
 
-	private static void purgeMissingFiles(List<FileEntry> duplicates){
-		for(Iterator<FileEntry> iterator = duplicates.iterator(); iterator.hasNext(); ){
-			FileEntry entry = iterator.next();
-			File file = new File(entry.getFileName());
-			if(!file.exists()){
-				logger.error(file.getAbsoluteFile() + " does not exist.  Was it moved or deleted?");
-				iterator.remove();
-			}
-		}
-	}
-	
+//	private static void purgeMissingFiles(List<FileEntry> duplicates){
+//		for(Iterator<FileEntry> iterator = duplicates.iterator(); iterator.hasNext(); ){
+//			FileEntry entry = iterator.next();
+//			File file = new File(entry.getFileName());
+//			if(!file.exists()){
+//				logger.error(file.getAbsoluteFile() + " does not exist.  Was it moved or deleted?");
+//				iterator.remove();
+//			}
+//		}
+//	}
+//	
 	
 	private static final Log logger = LogFactory.getLog(FindDup.class);
 
 	public  Map<String, List<FileEntry>> findDuplicates(String extension) {
 		long start = System.currentTimeMillis();
 		List<FileEntry> entries = find.createFileEntries(extension, store);
-		for (FileEntry entry : entries) {
-			store.persist(entry);
-		}
+//		for (FileEntry entry : entries) {
+//			store.persist(entry);
+//		}
 		Map<String, List<FileEntry>> dups = findAllDuplicates(entries, store);
 		logger.info("completed in " + (System.currentTimeMillis() - start) + " ms");
 		return dups;

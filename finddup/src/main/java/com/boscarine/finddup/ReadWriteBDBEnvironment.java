@@ -51,6 +51,7 @@ public class ReadWriteBDBEnvironment {
 
 		myEnvConfig.setReadOnly(readOnly);
 		storeConfig.setReadOnly(readOnly);
+		
 
 		// If the environment is opened for write, then we want to be able to
 		// create the environment and entity store if they do not exist.

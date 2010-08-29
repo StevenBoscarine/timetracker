@@ -39,7 +39,8 @@ public class FileEntryStore{
 	}
 
 	public void persist(FileEntry entity) {
-		primaryIndex.put(entity);
+		primaryIndex.putNoReturn(entity);
+		store.sync();
 	}
 
 	public boolean exists(File file) {

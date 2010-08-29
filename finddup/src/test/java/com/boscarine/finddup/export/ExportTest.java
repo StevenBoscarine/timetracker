@@ -15,7 +15,7 @@ public class ExportTest {
 		env.setup();
 		ReadOnlyStore store = ReadOnlyStore.getInstance();
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter("outfilename"));
+			BufferedWriter out = new BufferedWriter(new FileWriter("/home/steven/dboutput.txt"));
 			for (FileEntry entry : store.listAll()) {
 				// TODO: Finish me
 				out.write(entry.toString());
