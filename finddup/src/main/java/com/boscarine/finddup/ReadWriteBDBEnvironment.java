@@ -20,8 +20,6 @@ import org.apache.commons.logging.LogFactory;
  * 
  */
 public class ReadWriteBDBEnvironment {
-
-
 	private final Log logger = LogFactory.getLog(getClass());
 	public File getDefaultHomeDir(){
 		File envHome = new File(System.getProperty("user.home"), ".finddup");
@@ -50,8 +48,11 @@ public class ReadWriteBDBEnvironment {
 		StoreConfig storeConfig = new StoreConfig();
 
 		myEnvConfig.setReadOnly(readOnly);
+		//TODO:  Describe why we do this.
+		myEnvConfig.setTransactional(true);
 		storeConfig.setReadOnly(readOnly);
-
+      //TODO:  Describe why we do this.
+		storeConfig.setTransactional(true);
 		// If the environment is opened for write, then we want to be able to
 		// create the environment and entity store if they do not exist.
 		myEnvConfig.setAllowCreate(!readOnly);

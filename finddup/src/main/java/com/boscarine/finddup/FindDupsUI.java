@@ -9,6 +9,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Backing bean
  */
@@ -17,11 +20,18 @@ import javax.inject.Named;
 public class FindDupsUI {
 	private FindDup findDup;
 
+   private final Log logger = LogFactory.getLog(getClass());
 	public void setFilePattern(String filePattern) {
-		System.err.println("the setter was called");
 		this.filePattern = filePattern;
-		dups = transformDuplicatesToUIObjects(findDup.findDuplicates(filePattern));
+		dups = findDuplicates(filePattern);
 	}
+
+   public List<HashDisplay> findDuplicates(String filePattern)
+   {
+      List<HashDisplay> duplicates = transformDuplicatesToUIObjects(findDup.findDuplicates(filePattern));
+      logger.info("Found " + duplicates.size() + " duplicates");
+      return duplicates;
+   }
 
     private List<String> toDiscard;
 
@@ -48,7 +58,6 @@ public class FindDupsUI {
 	private static List<HashDisplay> dups;
 
 	public List<HashDisplay> transformDuplicatesToUIObjects(Map<String, List<FileEntry>> input) {
-		System.err.println("I was called");
 		List<HashDisplay> out = new ArrayList<HashDisplay>();
 		for (String key : input.keySet()) {
 			List<FileEntry> entries = input.get(key);

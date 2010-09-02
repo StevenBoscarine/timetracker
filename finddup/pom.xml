@@ -136,7 +136,7 @@
 				<version>3.0</version>
 				<configuration>
 					<app>${project.build.directory}/${build.finalName}.war</app>
-					<port>8080</port>
+					<port>8090</port>
 					<containerType>web</containerType>
 				</configuration>
 				<executions>

@@ -36,6 +36,7 @@ public class Find {
 					out.add(fileEntry);
 				}
 			} catch (Exception e) {
+			   logger.error(e);
 				throw new RuntimeException(e);
 			}
 		}
@@ -45,6 +46,9 @@ public class Find {
 
 	private List<File> createFileList(Collection<String> files, FileEntryStore store) {
 		List<File> out = new ArrayList<File>(files.size());
+		if(files.size() == 0){
+		   return out;
+		}
 		for (String fileName : files) {
 			File file = new File(fileName);
 			if (file.isDirectory()) {

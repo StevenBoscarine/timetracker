@@ -10,6 +10,7 @@ import com.boscarine.finddup.ReadWriteBDBEnvironment;
  * @author steven
  * 
  */
+
 public class ReadOnlyBDBEnvironment extends ReadWriteBDBEnvironment {
 	@Override
 	public void setup() {
