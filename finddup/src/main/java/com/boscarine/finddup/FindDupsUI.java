@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 @Named
 @RequestScoped
 public class FindDupsUI {
-	private FindDup findDup;
+	private FindDups findDups;
 
    private final Log logger = LogFactory.getLog(getClass());
 	public void setFilePattern(String filePattern) {
@@ -28,7 +28,7 @@ public class FindDupsUI {
 
    public List<HashDisplay> findDuplicates(String filePattern)
    {
-      List<HashDisplay> duplicates = transformDuplicatesToUIObjects(findDup.findDuplicates(filePattern));
+      List<HashDisplay> duplicates = transformDuplicatesToUIObjects(findDups.findDuplicates(filePattern));
       logger.info("Found " + duplicates.size() + " duplicates");
       return duplicates;
    }
@@ -80,8 +80,8 @@ public class FindDupsUI {
 	}
 
 	@Inject
-	public FindDupsUI(FindDup findDup) {
+	public FindDupsUI(FindDups findDups) {
 		this();
-		this.findDup = findDup;
+		this.findDups = findDups;
 	}
 }

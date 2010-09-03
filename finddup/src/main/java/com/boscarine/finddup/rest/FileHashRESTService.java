@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.boscarine.finddup.FileEntry;
 import com.boscarine.finddup.FileEntryStore;
-import com.boscarine.finddup.FindDup;
+import com.boscarine.finddup.FindDups;
 import com.boscarine.finddup.FindDupsUI;
 import com.boscarine.finddup.HashDisplay;
 
@@ -45,7 +45,7 @@ public class FileHashRESTService
 //   @Path("/finddups/{extension}")
 //   public Map<String, List<FileEntry>> finddups(@PathParam("extension") String extension)
 //   {
-//      FindDup tmp = new FindDup();
+//      FindDups tmp = new FindDups();
 //      return tmp.findDuplicates(extension);
 //   }
 
@@ -53,7 +53,7 @@ public class FileHashRESTService
    @Path("/{filePattern}")
    public List<HashDisplay> finddups(@PathParam("filePattern") String filePattern)
    {
-      FindDup tmp = new FindDup();
+      FindDups tmp = new FindDups();
       List<HashDisplay> dups = ui.findDuplicates(filePattern);
       logger.info("found " + dups.size() + " duplicate files");
       return dups;

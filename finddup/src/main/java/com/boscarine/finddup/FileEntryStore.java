@@ -14,17 +14,18 @@ import com.sleepycat.persist.EntityIndex;
 import com.sleepycat.persist.EntityStore;
 import com.sleepycat.persist.PrimaryIndex;
 import com.sleepycat.persist.SecondaryIndex;
-public class FileEntryStore{
-    private static FileEntryStore instance;
 
-    public static synchronized FileEntryStore getInstance() {
-        if(instance == null){
-            instance=new FileEntryStore();
-        }
-        return instance;
-    }
+public class FileEntryStore {
+	private static FileEntryStore instance;
 
-    private final ReadWriteBDBEnvironment env = new ReadWriteBDBEnvironment();
+	public static synchronized FileEntryStore getInstance() {
+		if (instance == null) {
+			instance = new FileEntryStore();
+		}
+		return instance;
+	}
+
+	private final ReadWriteBDBEnvironment env = new ReadWriteBDBEnvironment();
 	private final Log logger = LogFactory.getLog(getClass());
 	private final EntityStore store;
 	private final PrimaryIndex<String, FileEntry> primaryIndex;
@@ -44,7 +45,8 @@ public class FileEntryStore{
 
 	public boolean exists(File file) {
 		FileEntry fileEntry = primaryIndex.get(file.getAbsolutePath());
-		if (fileEntry != null && fileEntry.getSize() == file.length() && fileEntry.getLastModified() == file.lastModified()) {
+		if (fileEntry != null && fileEntry.getSize() == file.length()
+				&& fileEntry.getLastModified() == file.lastModified()) {
 			return true;
 		}
 		return false;
@@ -54,6 +56,10 @@ public class FileEntryStore{
 		return retrieveAllMembersFromIndex(primaryIndex.entities());
 	}
 
+	public FileEntry findByFileName(String fileName){
+		return primaryIndex.get(fileName);
+	}
+	
 	public List<FileEntry> findByMD5(String md5) {
 		EntityIndex<String, FileEntry> subIndex = secondaryIndex.subIndex(md5);
 		EntityCursor<FileEntry> cursor = subIndex.entities();
