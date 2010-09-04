@@ -8,7 +8,7 @@
         <f:viewParam id="id" name="filePattern" value="#{findDupsUI.filePattern}"
                      required="true"
                      requiredMessage="You did not specify a filePattern"
->
+                >
         </f:viewParam>
     </f:metadata>
 
@@ -24,14 +24,14 @@
                         <c:forEach var="file" items="#{entry.files}">
                             #{file.getAbsolutePath()}#{file.lastModified()}<br/>
                             <h:selectManyCheckbox value="#{findDupsUI.dups}">
-                                </h:selectManyCheckbox>
+                            </h:selectManyCheckbox>
                         </c:forEach>
                     </td>
                 </tr>
             </c:forEach>
 
         </table>
-     
+
 
     </ui:define>
 

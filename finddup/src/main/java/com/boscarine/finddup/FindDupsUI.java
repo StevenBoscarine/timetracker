@@ -9,19 +9,29 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Backing bean
  */
 @Named
 @RequestScoped
 public class FindDupsUI {
-	private FindDup findDup;
+    private FindDups findDups;
 
-	public void setFilePattern(String filePattern) {
-		System.err.println("the setter was called");
-		this.filePattern = filePattern;
-		dups = transformDuplicatesToUIObjects(findDup.findDuplicates(filePattern));
-	}
+    private final Log logger = LogFactory.getLog(getClass());
+
+    public void setFilePattern(String filePattern) {
+        this.filePattern = filePattern;
+        dups = findDuplicates(filePattern);
+    }
+
+    public List<HashDisplay> findDuplicates(String filePattern) {
+        List<HashDisplay> duplicates = transformDuplicatesToUIObjects(findDups.findDuplicates(filePattern));
+        logger.info("Found " + duplicates.size() + " duplicates");
+        return duplicates;
+    }
 
     private List<String> toDiscard;
 
@@ -29,7 +39,7 @@ public class FindDupsUI {
         return toDiscard;
     }
 
-    public void delete(){
+    public void delete() {
         System.out.println("Delete called");
     }
 
@@ -39,40 +49,39 @@ public class FindDupsUI {
 
     private String filePattern = "*.mov";
 
-	// tmp
+    // tmp
 
-	public String getFilePattern() {
-		return filePattern;
-	}
+    public String getFilePattern() {
+        return filePattern;
+    }
 
-	private static List<HashDisplay> dups;
+    private static List<HashDisplay> dups;
 
-	public List<HashDisplay> transformDuplicatesToUIObjects(Map<String, List<FileEntry>> input) {
-		System.err.println("I was called");
-		List<HashDisplay> out = new ArrayList<HashDisplay>();
-		for (String key : input.keySet()) {
-			List<FileEntry> entries = input.get(key);
-			List<File> files = new ArrayList<File>(entries.size());
-			for (FileEntry entry : entries) {
-				files.add(new File(entry.getFileName()));
-			}
-			out.add(new HashDisplay(key, files.get(0).length(), files));
-		}
-		return out;
-	}
+    public List<HashDisplay> transformDuplicatesToUIObjects(Map<String, List<FileEntry>> input) {
+        List<HashDisplay> out = new ArrayList<HashDisplay>();
+        for (String key : input.keySet()) {
+            List<FileEntry> entries = input.get(key);
+            List<File> files = new ArrayList<File>(entries.size());
+            for (FileEntry entry : entries) {
+                files.add(new File(entry.getFileName()));
+            }
+            out.add(new HashDisplay(key, files.get(0).length(), files));
+        }
+        return out;
+    }
 
-	public synchronized List<HashDisplay> getDups() {
+    public synchronized List<HashDisplay> getDups() {
 
-		return dups;
-	}
+        return dups;
+    }
 
-	public FindDupsUI() {
-		super();
-	}
+    public FindDupsUI() {
+        super();
+    }
 
-	@Inject
-	public FindDupsUI(FindDup findDup) {
-		this();
-		this.findDup = findDup;
-	}
+    @Inject
+    public FindDupsUI(FindDups findDups) {
+        this();
+        this.findDups = findDups;
+    }
 }

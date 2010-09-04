@@ -25,7 +25,7 @@
                         <c:forEach var="file" items="#{entry.files}">
                             #{file.getAbsolutePath()}#{file.lastModified()}<br/>
                             <h:selectManyCheckbox value="#{findDupsUI.dups}">
-                                </h:selectManyCheckbox>
+                            </h:selectManyCheckbox>
                         </c:forEach>
                     </td>
                 </tr>

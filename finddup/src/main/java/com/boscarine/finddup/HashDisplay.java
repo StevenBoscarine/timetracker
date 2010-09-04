@@ -3,27 +3,40 @@ package com.boscarine.finddup;
 import java.io.File;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.sun.xml.txw2.annotation.XmlElement;
+
+@XmlRootElement
 public class HashDisplay {
-	private final String md5;
-	private final long fileSize;
-	private final List<File> files;
+    private String md5;
+    private long fileSize;
+    private List<File> files;
 
-	public HashDisplay(String md5, long fileSize, List<File> files) {
-		super();
-		this.md5 = md5;
-		this.fileSize = fileSize;
-		this.files = files;
-	}
+    private HashDisplay() {
+        super();
+    }
 
-	public String getMd5() {
-		return md5;
-	}
+    public HashDisplay(String md5, long fileSize, List<File> files) {
+        this();
+        this.md5 = md5;
+        this.fileSize = fileSize;
+        this.files = files;
+    }
 
-	public long getFileSize() {
-		return fileSize;
-	}
+    @XmlAttribute
+    public String getMd5() {
+        return md5;
+    }
 
-	public List<File> getFiles() {
-		return files;
-	}
+    @XmlAttribute
+    public long getFileSize() {
+        return fileSize;
+    }
+
+    @XmlElement
+    public List<File> getFiles() {
+        return files;
+    }
 }

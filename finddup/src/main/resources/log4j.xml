@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration SYSTEM "./log4j.dtd">
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+<!DOCTYPE log4j:configuration
+        PUBLIC "-//Apache//DTD Log4j 1.2//EN"
+        "http://logging.apache.org/log4j/docs/api/org/apache/log4j/xml/log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
     <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%-2p %C{1}.%M - %m%n" />
+            <param name="ConversionPattern" value="%-2p %C{1}.%M - %m%n"/>
         </layout>
     </appender>
     <root>
-        <priority value="debug" />
-        <appender-ref ref="STDOUT" />
+        <priority value="debug"/>
+        <appender-ref ref="STDOUT"/>
     </root>
     <logger name="com.boscarine" additivity="false">
-        <level value="debug" />
-        <appender-ref ref="STDOUT" />
+        <level value="debug"/>
+        <appender-ref ref="STDOUT"/>
     </logger>
 </log4j:configuration>
