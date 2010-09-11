@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class BeanPrinter {
     /**
@@ -20,13 +19,7 @@ public class BeanPrinter {
         return printMe(c, 0);
     }
 
-    public static String printMap(Map<?, ?> c) {
-        StringBuilder sb = new StringBuilder();
-        for (Object key : c.keySet()) {
-            sb.append("\n" + key + "\t" + printMe(c.get(key)));
-        }
-        return sb.toString();
-    }
+
 
     private static String printMe(Object o, int tabPosition) {
         if (o == null)

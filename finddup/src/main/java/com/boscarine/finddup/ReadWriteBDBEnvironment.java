@@ -24,7 +24,7 @@ public class ReadWriteBDBEnvironment {
     public File getDefaultHomeDir() {
         File envHome = new File(System.getProperty("user.home"), ".finddup");
         envHome.mkdirs();
-        logger.info(envHome.getAbsoluteFile());
+        logger.info("Using Berkeley Database in " + envHome.getAbsoluteFile());
         return envHome;
 
     }

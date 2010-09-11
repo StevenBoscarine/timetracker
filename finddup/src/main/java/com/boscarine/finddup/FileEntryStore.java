@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PreDestroy;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,19 +16,26 @@ import com.sleepycat.persist.EntityIndex;
 import com.sleepycat.persist.EntityStore;
 import com.sleepycat.persist.PrimaryIndex;
 import com.sleepycat.persist.SecondaryIndex;
-
+/**
+ * Wrapper for BDB code
+ * @author steven
+ *
+ */
+@Singleton
+@Named
 public class FileEntryStore {
     private static FileEntryStore instance;
 
-    public static synchronized FileEntryStore getInstance() {
-        if (instance == null) {
-            instance = new FileEntryStore();
-        }
-        return instance;
-    }
+//    public static synchronized FileEntryStore getInstance() {
+//        if (instance == null) {
+//            instance = new FileEntryStore();
+//        }
+//        return instance;
+//    }
 
     private final ReadWriteBDBEnvironment env = new ReadWriteBDBEnvironment();
-    private final Log logger = LogFactory.getLog(getClass());
+    @SuppressWarnings("unused")
+	private final Log logger = LogFactory.getLog(getClass());
     private final EntityStore store;
     private final PrimaryIndex<String, FileEntry> primaryIndex;
     private final SecondaryIndex<String, String, FileEntry> secondaryIndex;
@@ -67,16 +76,15 @@ public class FileEntryStore {
         return retrieveAllMembersFromIndex(cursor);
     }
 
-    private List<FileEntry> retrieveAllMembersFromIndex(EntityCursor<FileEntry> pi_cursor) {
+    private List<FileEntry> retrieveAllMembersFromIndex(EntityCursor<FileEntry> cursor) {
         List<FileEntry> out = new ArrayList<FileEntry>();
         try {
-            for (FileEntry entry : pi_cursor) {
+            for (FileEntry entry : cursor) {
                 out.add(entry);
             }
             // Always make sure the cursor is closed when we are done with it.
         } finally {
-            pi_cursor.close();
-
+            cursor.close();
         }
         return out;
     }

@@ -33,6 +33,9 @@ public class FindDupsUI {
         return duplicates;
     }
 
+    /**
+     * Values the user has selected via the UI to send to recycle bin.
+     */
     private List<String> toDiscard;
 
     public List<String> getToDiscard() {
@@ -71,7 +74,6 @@ public class FindDupsUI {
     }
 
     public synchronized List<HashDisplay> getDups() {
-
         return dups;
     }
 

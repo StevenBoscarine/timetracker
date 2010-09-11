@@ -8,14 +8,19 @@ import java.util.TreeMap;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-@ApplicationScoped
+//@ApplicationScoped
+@Singleton
 public class FindDups {
     private static final Log logger = LogFactory.getLog(FindDups.class);
-    private FileEntryStore store = FileEntryStore.getInstance();
+//    private FileEntryStore store = FileEntryStore.getInstance();
+    @Inject
+    private FileEntryStore store;
     final FindDupsNativeEngine findDupsNativeEngine = new FindDupsNativeEngine();
 
     private static Map<String, List<FileEntry>> findAllDuplicates(List<FileEntry> filesFound, final FileEntryStore store) {

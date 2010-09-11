@@ -7,7 +7,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.xml.txw2.annotation.XmlElement;
-
+/**
+ * Bean returned by service layer to GUI
+ * @author steven
+ *
+ */
 @XmlRootElement
 public class HashDisplay {
     private String md5;

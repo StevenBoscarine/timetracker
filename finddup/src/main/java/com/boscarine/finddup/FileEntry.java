@@ -65,5 +65,4 @@ public class FileEntry implements Serializable {
     public String toString() {
         return fileName + "[lastModified=" + new Date(lastModified) + ", size=" + size + ", md5=" + md5 + "]";
     }
-
 }
