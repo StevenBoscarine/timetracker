@@ -25,7 +25,7 @@ public class FindDupsNativeEngine {
 	public List<FileEntry> createFileEntries(String locatePattern, FileEntryStore store) {
 		long start = System.currentTimeMillis();
 		Collection<String> files = NativeCodeWrapper.runNativeCommand("locate", locatePattern);
-		logger.info("found " + files.size() + " candidates for pattern: " + locatePattern);
+		logger.info("found " + files.size() + " candidates for pattern: " + locatePattern + " in " + (System.currentTimeMillis()-start) + " ms.");
 		return buildFileEntriesFromFileList(files, store);
 	}
 

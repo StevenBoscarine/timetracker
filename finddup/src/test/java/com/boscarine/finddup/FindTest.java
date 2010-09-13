@@ -4,11 +4,10 @@ import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jboss.arquillian.testng.Arquillian;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Test;
 
-@Test(enabled = true)
+@Test(enabled = false)
 public class FindTest extends AbstractArquillianTest{
 	@SuppressWarnings("unused")
 	private final Log logger = LogFactory.getLog(getClass());
@@ -31,7 +30,7 @@ public class FindTest extends AbstractArquillianTest{
 
 	public void seedDatabase() {
 
-		//findDups.findDuplicates("*ATK*.jpg");
+		findDups.findDuplicates("*.mp3");
 
 	}
 	@AfterSuite
