@@ -9,6 +9,7 @@
 	</parent>
 	<artifactId>finddup</artifactId>
 	<packaging>war</packaging>
+	<name>finddups-JavaEE</name>
 	<properties>
 		<!-- Explicitly declaring the source encoding eliminates the following message: -->
 		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent! -->
@@ -116,6 +117,30 @@
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
+
+
+			<plugin>
+				<groupId>org.jboss.tattletale</groupId>
+				<artifactId>tattletale-maven</artifactId>
+				<version>1.1.0.Final</version>
+				<executions>
+					<execution>
+						<id>run-tattletale-plugin</id>
+						<phase>site</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<source>${project.build.directory}/src</source>
+							<destination>${project.build.directory}/site/tattletale</destination>
+							<profiles>
+								<profile>java5</profile>
+							</profiles>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- Configure the Embedded GlassFish Maven plugin -->
 			<plugin>
 				<groupId>org.glassfish</groupId>
