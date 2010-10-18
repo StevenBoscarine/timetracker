@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="finddup:war">
+    <output-path>$PROJECT_DIR$/finddup/target</output-path>
+    <root id="archive" name="finddup.war">
+      <element id="artifact" artifact-name="finddup:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>TestNG:  Unit Test</title>
+<style type="text/css">
+table caption,table.info_table,table.param,table.passed,table.failed {margin-bottom:10px;border:1px solid #000099;border-collapse:collapse;empty-cells:show;}
+table.info_table td,table.info_table th,table.param td,table.param th,table.passed td,table.passed th,table.failed td,table.failed th {
+border:1px solid #000099;padding:.25em .5em .25em .5em
+}
+table.param th {vertical-align:bottom}
+td.numi,th.numi,td.numi_attn {
+text-align:right
+}
+tr.total td {font-weight:bold}
+table caption {
+text-align:center;font-weight:bold;
+}
+table.passed tr.stripe td,table tr.passedodd td {background-color: #00AA00;}
+table.passed td,table tr.passedeven td {background-color: #33FF33;}
+table.passed tr.stripe td,table tr.skippedodd td {background-color: #cccccc;}
+table.passed td,table tr.skippedodd td {background-color: #dddddd;}
+table.failed tr.stripe td,table tr.failedodd td,table.param td.numi_attn {background-color: #FF3333;}
+table.failed td,table tr.failedeven td,table.param tr.stripe td.numi_attn {background-color: #DD0000;}
+tr.stripe td,tr.stripe th {background-color: #E6EBF9;}
+p.totop {font-size:85%;text-align:center;border-bottom:2px black solid}
+div.shootout {padding:2em;border:3px #4854A8 solid}
+</style>
+</head>
+<body>
+<table cellspacing=0 cellpadding=0 class="param">
+<tr><th>Test</th><th class="numi">Methods<br/>Passed</th><th class="numi">Scenarios<br/>Passed</th><th class="numi"># skipped</th><th class="numi"># failed</th><th class="numi">Total<br/>Time</th><th class="numi">Included<br/>Groups</th><th class="numi">Excluded<br/>Groups</th></tr>
+<tr><td style="text-align:left;padding-right:2em">com.boscarine.finddup.TestFindDups</td><td class="numi">0</td><td class="numi">0</td><td class="numi">0</td><td class="numi_attn">1</td><td class="numi">3.7 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+</table>
+<a id="summary"></a>
+<table cellspacing=0 cellpadding=0 class="passed">
+<tr><th>Class</th><th>Method</th><th># of<br/>Scenarios</th><th>Time<br/>(Msecs)</th></tr>
+<tr><th colspan="4">com.boscarine.finddup.TestFindDups &#8212; failed</th></tr>
+<tr class="failedodd"><td rowspan="1">com.boscarine.finddup.TestFindDups<td><a href="#m1"><b>test</b>  </a></td><td class="numi">1</td><td class="numi">3610</td></tr>
+</table>
+<h1>com.boscarine.finddup.TestFindDups</h1>
+<a id="m1"></a><h2>com.boscarine.finddup.TestFindDups:test</h2>
+<div style="padding-left:3em">
+<p>com.sun.xml.bind.v2.runtime.IllegalAnnotationsException: 4 counts of IllegalAnnotationExceptions
+Class has two properties of the same name &quot;fileSize&quot;
+	this problem is related to the following location:
+		at public long com.boscarine.finddup.DuplicateReport$DuplicateSet.getFileSize()
+		at com.boscarine.finddup.DuplicateReport$DuplicateSet
+		at private final java.util.List com.boscarine.finddup.DuplicateReport.duplicates
+		at com.boscarine.finddup.DuplicateReport
+	this problem is related to the following location:
+		at private long com.boscarine.finddup.DuplicateReport$DuplicateSet.fileSize
+		at com.boscarine.finddup.DuplicateReport$DuplicateSet
+		at private final java.util.List com.boscarine.finddup.DuplicateReport.duplicates
+		at com.boscarine.finddup.DuplicateReport
+Class has two properties of the same name &quot;md5&quot;
+	this problem is related to the following location:
+		at public java.lang.String com.boscarine.finddup.DuplicateReport$DuplicateSet.getMd5()
+		at com.boscarine.finddup.DuplicateReport$DuplicateSet
+		at private final java.util.List com.boscarine.finddup.DuplicateReport.duplicates
+		at com.boscarine.finddup.DuplicateReport
+	this problem is related to the following location:
+		at private java.lang.String com.boscarine.finddup.DuplicateReport$DuplicateSet.md5
+		at com.boscarine.finddup.DuplicateReport$DuplicateSet
+		at private final java.util.List com.boscarine.finddup.DuplicateReport.duplicates
+		at com.boscarine.finddup.DuplicateReport
+Class has two properties of the same name &quot;lastModified&quot;
+	this problem is related to the following location:
+		at public java.util.Date com.boscarine.finddup.DuplicateReport$FileInfo.getLastModified()
+		at com.boscarine.finddup.DuplicateReport$FileInfo
+		at private final java.util.List com.boscarine.finddup.DuplicateReport$DuplicateSet.files
+		at com.boscarine.finddup.DuplicateReport$DuplicateSet
+		at private final java.util.List com.boscarine.finddup.DuplicateReport.duplicates
+		at com.boscarine.finddup.DuplicateReport
+	this problem is related to the following location:
+		at private java.util.Date com.boscarine.finddup.DuplicateReport$FileInfo.lastModified
+		at com.boscarine.finddup.DuplicateReport$FileInfo
+		at private final java.util.List com.boscarine.finddup.DuplicateReport$DuplicateSet.files
+		at com.boscarine.finddup.DuplicateReport$DuplicateSet
+		at private final java.util.List com.boscarine.finddup.DuplicateReport.duplicates
+		at com.boscarine.finddup.DuplicateReport
+Class has two properties of the same name &quot;path&quot;
+	this problem is related to the following location:
+		at public java.lang.String com.boscarine.finddup.DuplicateReport$FileInfo.getPath()
+		at com.boscarine.finddup.DuplicateReport$FileInfo
+		at private final java.util.List com.boscarine.finddup.DuplicateReport$DuplicateSet.files
+		at com.boscarine.finddup.DuplicateReport$DuplicateSet
+		at private final java.util.List com.boscarine.finddup.DuplicateReport.duplicates
+		at com.boscarine.finddup.DuplicateReport
+	this problem is related to the following location:
+		at private java.lang.String com.boscarine.finddup.DuplicateReport$FileInfo.path
+		at com.boscarine.finddup.DuplicateReport$FileInfo
+		at private final java.util.List com.boscarine.finddup.DuplicateReport$DuplicateSet.files
+		at com.boscarine.finddup.DuplicateReport$DuplicateSet
+		at private final java.util.List com.boscarine.finddup.DuplicateReport.duplicates
+		at com.boscarine.finddup.DuplicateReport
+</p>
+com.sun.jersey.core.provider.jaxb.AbstractRootElementProvider.readFrom(AbstractRootElementProvider.java:109)
+<br/>at com.sun.jersey.api.client.ClientResponse.getEntity(ClientResponse.java:532)
+<br/>at com.sun.jersey.api.client.ClientResponse.getEntity(ClientResponse.java:491)
+<br/>at com.sun.jersey.api.client.WebResource.handle(WebResource.java:561)
+<br/>at com.sun.jersey.api.client.WebResource.get(WebResource.java:179)
+<br/>at com.boscarine.finddup.FindDupsClient.get(FindDupsClient.java:40)
+<br/>at com.boscarine.finddup.FindDupsClient.get(FindDupsClient.java:29)
+<br/>at com.boscarine.finddup.FindDupsClient.get(FindDupsClient.java:51)
+<br/>at com.boscarine.finddup.TestFindDups.test(TestFindDups.java:16)
+<br/>24 lines not shown
+<p>Caused by 4 counts of IllegalAnnotationExceptions</p>
+com.sun.xml.bind.v2.runtime.IllegalAnnotationsException$Builder.check(IllegalAnnotationsException.java:102)
+<br/>at com.sun.xml.bind.v2.runtime.JAXBContextImpl.getTypeInfoSet(JAXBContextImpl.java:472)
+<br/>at com.sun.xml.bind.v2.runtime.JAXBContextImpl.&lt;init&gt;(JAXBContextImpl.java:302)
+<br/>at com.sun.xml.bind.v2.runtime.JAXBContextImpl$JAXBContextBuilder.build(JAXBContextImpl.java:1140)
+<br/>at com.sun.xml.bind.v2.ContextFactory.createContext(ContextFactory.java:154)
+<br/>at com.sun.xml.bind.v2.ContextFactory.createContext(ContextFactory.java:121)
+<br/>at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br/>at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+<br/>at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+<br/>at java.lang.reflect.Method.invoke(Method.java:597)
+<br/>at javax.xml.bind.ContextFinder.newInstance(ContextFinder.java:202)
+<br/>at javax.xml.bind.ContextFinder.find(ContextFinder.java:363)
+<br/>at javax.xml.bind.JAXBContext.newInstance(JAXBContext.java:574)
+<br/>at javax.xml.bind.JAXBContext.newInstance(JAXBContext.java:522)
+<br/>at com.sun.jersey.core.provider.jaxb.AbstractJAXBProvider.getStoredJAXBContext(AbstractJAXBProvider.java:180)
+<br/>at com.sun.jersey.core.provider.jaxb.AbstractJAXBProvider.getJAXBContext(AbstractJAXBProvider.java:173)
+<br/>at com.sun.jersey.core.provider.jaxb.AbstractJAXBProvider.getUnmarshaller(AbstractJAXBProvider.java:125)
+<br/>at com.sun.jersey.core.provider.jaxb.AbstractJAXBProvider.getUnmarshaller(AbstractJAXBProvider.java:108)
+<br/>at com.sun.jersey.core.provider.jaxb.AbstractRootElementProvider.readFrom(AbstractRootElementProvider.java:105)
+<br/>at com.sun.jersey.api.client.ClientResponse.getEntity(ClientResponse.java:532)
+<br/>at com.sun.jersey.api.client.ClientResponse.getEntity(ClientResponse.java:491)
+<br/>at com.sun.jersey.api.client.WebResource.handle(WebResource.java:561)
+<br/>at com.sun.jersey.api.client.WebResource.get(WebResource.java:179)
+<br/>at com.boscarine.finddup.FindDupsClient.get(FindDupsClient.java:40)
+<br/>at com.boscarine.finddup.FindDupsClient.get(FindDupsClient.java:29)
+<br/>at com.boscarine.finddup.FindDupsClient.get(FindDupsClient.java:51)
+<br/>at com.boscarine.finddup.TestFindDups.test(TestFindDups.java:16)
+<br/>24 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+</body></html>
